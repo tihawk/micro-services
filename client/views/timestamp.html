@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{title}}</h3>
+  </div>
+  <div class="panel-body">
+    <p>{{descr}}</p>
+    <form ng-submit="getDate()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="time wanna-be goes here..." ng-model="input">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </span>
+      </div>
+    </form>
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Natural</strong>: {{date.natural || 'null'}}</li>
+      <li class="list-group-item"><strong>Unixtime</strong>: {{date.unixtime || 'null'}}</li>
+    </ul>
+
+  </div>
+</div>

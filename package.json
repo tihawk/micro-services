@@ -1,0 +1,26 @@
+{
+  "name": "micro-services",
+  "version": "1.0.0",
+  "description": "A small collection of useless web micro-services",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016\u0016\u0016\u0016https://github.com/tihawk/micro-services.git"
+  },
+  "author": "Kiril P. Blagoev",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.7",
+    "angular-route": "^1.6.7",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "mongoose": "^4.13.5",
+    "remove": "^0.1.5"
+  }
+}
