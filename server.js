@@ -30,6 +30,20 @@ app.get('/api/timestamp/:date', function(req, res){
 	res.send(timeService.timeService(url));
 });
 
+//handle api get request for header parser
+app.get('/api/whoami', function(req, res){
+	var ip = req.headers['x-forwarded-for'] || 
+     req.connection.remoteAddress || 
+     req.socket.remoteAddress ||
+     req.connection.socket.remoteAddress;
+	var info = {
+         'ip': ip,
+         'lang': req.headers["accept-language"].split(',')[0],
+         'os': req.headers['user-agent'].split(') ')[0].split(' (')[1]
+     };
+	res.send(info);
+})
+
 app.listen(config.port, function(){
 	console.log('listening on port ' + config.port + '...');
 });
