@@ -7,7 +7,7 @@ var config = require('./config.js');
 
 //specify static files folder
 app.use(express.static(path.join(__dirname, '/client')));
-/*<FOR LATER USE>
+
 //use body-parser middleware for POST
 app.use(bodyParser.json());
 //setup bodyparser to handle URL encoded bodies
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //connect to database
 mongoose.connect('mongodb://' + config.db.usr + ':' + config.db.pass + '@' + config.db.host, {useMongoClient: true});
-</FOR LATER USE>*/
+
 //handle lack of index.html
 app.get('/', function(req, res){
 	res.send('A collection of useless web micro services');
@@ -30,6 +30,7 @@ app.get('/api/timestamp/:date', function(req, res){
 	res.send(timeService.timeService(url));
 });
 
+//HEADER PARSER
 //handle api get request for header parser
 app.get('/api/whoami', function(req, res){
 	var ip = req.headers['x-forwarded-for'] || 
@@ -43,6 +44,57 @@ app.get('/api/whoami', function(req, res){
      };
 	res.send(info);
 })
+
+//URL SHORTENER
+var url = require('./models/url');
+var base58 = require('./js/base58');
+//handle post request to shorten url
+app.post('/api/shorten', function(req, res){
+	var longUrl = req.body.url;
+	var shortUrl = '';
+	var currentId;
+
+	//check if longUrl already exists in database and act accordingly
+	url.Url.findOne({long_url: longUrl}, function(err, found){
+		if(found){
+			shortUrl = config.webhost + base58.encode(found._id);
+			res.send({'shortUrl': shortUrl});
+		} else {
+			
+			url.Counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1}}, function(err, updated){
+				currentId = updated.seq;
+				//res.send({'id': currentId});
+
+				url.Url.create({
+					_id: currentId,
+					long_url: longUrl,
+					created_at: new Date()
+				}, function(err, posted){
+					if(err) {throw err;}
+					shortUrl = config.webhost + base58.encode(currentId);
+
+					res.send({'shortUrl': shortUrl})
+
+				})
+			});
+
+		}
+
+	});
+});
+//handle get request to unshorten and redirect
+app.get('/l/:encoded', function(req, res){
+	var id = base58.decode(req.params.encoded);
+
+	url.Url.findOne({_id: id}, function(err, link){
+		if(link){
+			res.redirect(link.long_url);
+		} else {
+			res.redirect(config.webhost + '#/urlshortener')
+		}
+	})
+
+});
 
 app.listen(config.port, function(){
 	console.log('listening on port ' + config.port + '...');
