@@ -1,6 +1,6 @@
 # useless μicro-services
 
-not online yet: ~~This is a small collection of pretty useless web micro-services. They can have a purpose if you find one for them. Apart from that, this is more of a fun project for a custom API. Access them via the navbar on top, or go to API and find out how to access these tools using requests to the API from your website.~~
+This is a small collection of pretty useless web micro-services. They can have a purpose if you find one for them. Apart from that, this is more of a fun project for a custom API. Access them via the navbar on top, or go to API and find out how to access these tools using requests to the API from your website.
 
 ### Contains:
 
@@ -8,15 +8,21 @@ not online yet: ~~This is a small collection of pretty useless web micro-service
 - [x] Header parser with info for IP, OS and Language
 - [ ] URL shortener
 - [ ] Image search abstraction layer
-- [ ] uploaded file metadata
+- [ ] Uploaded file metadata
 
 ### TODO:
 
 - [ ] add the remaining services
 - [ ] add info about using the API
-- [ ] get running online
+- [x] get running online
 - [ ] add CORS
 - [ ] prettify?
-- [ ] run browserfy or smtin
+- [x] make a bundle for the client end dependencies (browserify)
 
-### ~~How to make calls to API:~~ coming soon...
+## ~~How to make calls to API:~~
+
+### Timestamp
+
+### Header Parser
+
+### comming soon...
