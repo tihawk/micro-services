@@ -55,7 +55,7 @@ app.post('/api/shorten', function(req, res){
 	var shortUrl = '';
 	var currentId;
 	//check if valid url
-	if(validator.isURL(longUrl)){
+	if(validator.isURL(longUrl, {require_protocol: true})){
 			//check if longUrl already exists in database and act accordingly
 			url.Url.findOne({long_url: longUrl}, function(err, found){
 				if(found){
@@ -83,11 +83,11 @@ app.post('/api/shorten', function(req, res){
 				}
 
 			});
-		});
+
 	} else {
 		res.send({'shortUrl': 'Invalid URL'})
 	}
-
+});
 
 //handle get request to unshorten and redirect
 app.get('/l/:encoded', function(req, res){
@@ -97,7 +97,7 @@ app.get('/l/:encoded', function(req, res){
 		if(link){
 			res.redirect(link.long_url);
 		} else {
-			res.redirect(config.webhost + '#/urlshortener')
+			res.redirect(config.webhost.slice(0, config.webhost.length-2) + '#/urlshortener')
 		}
 	})
 
