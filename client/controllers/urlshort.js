@@ -3,7 +3,7 @@ var myApp = angular.module('myApp');
 myApp.controller('URLShortenerController', ['$scope', '$http', function($scope, $http){
 
 	$scope.title = 'useless url shortener μicro-service';
-	$scope.descr = "Enter a URL address into the bar, hit 'Shorten', and behold! There's a somewhat shortened version of your URL. Guaranteed to not collect any information about the URLs provided, apart from the link itself.";
+	$scope.descr = "Enter a URL address into the bar, hit 'Shorten', and behold! There's a somewhat shortened version of your URL. Guaranteed to not collect any information about the URLs provided, apart from the link itself. And yes, a short version of the URL to this particular page already exists under /l/4. Incepted much?";
 
 	$scope.urlObj = {
 		url: ''

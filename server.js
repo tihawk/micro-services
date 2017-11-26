@@ -4,6 +4,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
+var validator = require('validator');
 
 //specify static files folder
 app.use(express.static(path.join(__dirname, '/client')));
@@ -53,35 +54,41 @@ app.post('/api/shorten', function(req, res){
 	var longUrl = req.body.url;
 	var shortUrl = '';
 	var currentId;
+	//check if valid url
+	if(validator.isURL(longUrl)){
+			//check if longUrl already exists in database and act accordingly
+			url.Url.findOne({long_url: longUrl}, function(err, found){
+				if(found){
+					shortUrl = config.webhost + base58.encode(found._id);
+					res.send({'shortUrl': shortUrl});
+				} else {
+					
+					url.Counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1}}, function(err, updated){
+						currentId = updated.seq;
+						//res.send({'id': currentId});
 
-	//check if longUrl already exists in database and act accordingly
-	url.Url.findOne({long_url: longUrl}, function(err, found){
-		if(found){
-			shortUrl = config.webhost + base58.encode(found._id);
-			res.send({'shortUrl': shortUrl});
-		} else {
-			
-			url.Counter.findByIdAndUpdate({_id: 'url_count'}, {$inc: {seq: 1}}, function(err, updated){
-				currentId = updated.seq;
-				//res.send({'id': currentId});
+						url.Url.create({
+							_id: currentId,
+							long_url: longUrl,
+							created_at: new Date()
+						}, function(err, posted){
+							if(err) {throw err;}
+							shortUrl = config.webhost + base58.encode(currentId);
 
-				url.Url.create({
-					_id: currentId,
-					long_url: longUrl,
-					created_at: new Date()
-				}, function(err, posted){
-					if(err) {throw err;}
-					shortUrl = config.webhost + base58.encode(currentId);
+							res.send({'shortUrl': shortUrl})
 
-					res.send({'shortUrl': shortUrl})
+						})
+					});
 
-				})
+				}
+
 			});
+		});
+	} else {
+		res.send({'shortUrl': 'Invalid URL'})
+	}
 
-		}
 
-	});
-});
 //handle get request to unshorten and redirect
 app.get('/l/:encoded', function(req, res){
 	var id = base58.decode(req.params.encoded);

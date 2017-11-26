@@ -21,6 +21,7 @@
     "express": "^4.16.2",
     "jquery": "^3.2.1",
     "mongoose": "^4.13.5",
-    "remove": "^0.1.5"
+    "remove": "^0.1.5",
+    "validator": "^9.1.2"
   }
 }
