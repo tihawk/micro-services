@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var config = require('./config.js');
 var validator = require('validator');
 
+//connect to database
+mongoose.connect('mongodb://' + config.db.usr + ':' + config.db.pass + '@' + config.db.host, {useMongoClient: true});
+
 //specify static files folder
 app.use(express.static(path.join(__dirname, '/client')));
 
@@ -14,8 +17,12 @@ app.use(bodyParser.json());
 //setup bodyparser to handle URL encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//connect to database
-mongoose.connect('mongodb://' + config.db.usr + ':' + config.db.pass + '@' + config.db.host, {useMongoClient: true});
+//set up CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 //handle lack of index.html
 app.get('/', function(req, res){
