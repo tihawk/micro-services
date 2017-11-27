@@ -32,7 +32,7 @@ This is a small collection of pretty useless web micro-services. They can have a
 ##### GET
 Simply send a GET request to the endpoint with the natural/ISO/unixtime time at the end. If it's invalid, it will return the same JSON object, but with `null` as values.
 ##### Sample:
-<https://ums.glitch.me/api/timestamp/1991 02 19>
+<https://ums.glitch.me/api/timestamp/1991%2002%2019>
 **returns**
 ```javascript
 {
