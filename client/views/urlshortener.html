@@ -12,7 +12,7 @@
         </span>
       </div>
     </form>
-    <ul class="list-group">
+    <ul class="list-group" ng-if="shortUrl">
       <li class="list-group-item"><strong>Short URL: </strong><a href="{{shortUrl || ''}}" target="_blank">{{shortUrl || ''}}</a></li>
     </ul>
 

@@ -12,11 +12,11 @@ This is a small collection of pretty useless web micro-services. They can have a
 - [x] Header parser with info for IP, OS and Language
 - [x] URL shortener
 - [x] Image search abstraction layer
-- [ ] Uploaded file metadata
+- [x] Uploaded file metadata
 
 ### TODO:
 
-- [ ] add the remaining services
+- [x] add the remaining services
 - [x] add info about using the API
 - [x] get running online
 - [x] add CORS
@@ -116,6 +116,4 @@ Upon sending a GET request to the above endpoint, a list of the last ten searche
 "__v": 0
 }]
 ```
-
-### comming soon...
 

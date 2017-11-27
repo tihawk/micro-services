@@ -9,7 +9,6 @@ myApp.controller('TimestampController', ['$scope', '$http', function($scope, $ht
 		$http.get('/api/timestamp/'+$scope.input)
 			.then(function(response){
 				$scope.date = response.data;
-				console.log($scope.date);
 			}, function(error){
 				console.log(error);
 			});

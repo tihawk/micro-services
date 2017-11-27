@@ -12,9 +12,9 @@
         </span>
       </div>
     </form>
-    <ul class="list-group">
-      <li class="list-group-item"><strong>Natural</strong>: {{date.natural || 'null'}}</li>
-      <li class="list-group-item"><strong>Unixtime</strong>: {{date.unixtime || 'null'}}</li>
+    <ul class="list-group" ng-if="date">
+      <li class="list-group-item"><strong>Natural</strong>: {{date.natural || ''}}</li>
+      <li class="list-group-item"><strong>Unixtime</strong>: {{date.unixtime || ''}}</li>
     </ul>
 
   </div>

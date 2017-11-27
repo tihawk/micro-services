@@ -23,7 +23,12 @@
     "google-images": "^2.1.0",
     "jquery": "^3.2.1",
     "mongoose": "^4.13.5",
+    "multer": "^1.3.0",
+    "ng-file-upload": "^12.2.13",
     "remove": "^0.1.5",
     "validator": "^9.1.2"
+  },
+  "engines": {
+    "node": "^7.7.4"
   }
 }

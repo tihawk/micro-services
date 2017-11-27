@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'angular.filter']);
+var myApp = angular.module('myApp', ['ngRoute', 'angular.filter', 'ngFileUpload']);
 
 myApp.config(function($routeProvider, $locationProvider){
 	$locationProvider.hashPrefix('');
@@ -22,6 +22,10 @@ myApp.config(function($routeProvider, $locationProvider){
 		.when('/imagesearch', {
 			controller: 'ImagesearchController',
 			templateUrl: 'views/imagesearch.html'
+		})
+		.when('/filemetadata', {
+			controller: 'FileMetadataController',
+			templateUrl: 'views/filemetadata.html'
 		})
 		.otherwise({
 			redirectTo: '/'

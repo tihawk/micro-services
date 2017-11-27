@@ -5,7 +5,7 @@
   <div class="panel-body">
     <p>{{descr}}</p>
     <button type="button" class="btn btn-default" ng-click="getInfo()">I am fearless!</button>
-    <ul class="list-group">
+    <ul class="list-group" ng-if="info">
       <li class="list-group-item"><strong>IP Address</strong>: {{info.ip || 'null'}}</li>
       <li class="list-group-item"><strong>Operating System</strong>: {{info.os || 'null'}}</li>
       <li class="list-group-item"><strong>Language</strong>: {{info.lang || 'null'}}</li>

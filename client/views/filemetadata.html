@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{title}}</h3>
+  </div>
+  <div class="panel-body">
+    <p>{{descr}}</p>
+    <form ng-submit="upload()">
+      <div class="btn btn-default" ngf-select ng-model="file">Select</div>
+      <button class="btn btn-default" type="submit">Upload</button>
+      <span ng-if="uploading">{{progress}}% done</span>
+    </form>
+    <ul class="list-group" ng-if="fileData">
+      <li class="list-group-item"><strong>name:</strong> {{fileData.originalname || ''}}</li>
+      <li class="list-group-item"><strong>Size:</strong> {{fileData.size/1000 || ''}} Kbytes</li>
+      <li class="list-group-item"><strong>Type:</strong> {{fileData.mimetype || ''}}</li>
+    </ul>
+  </div>
+</div>

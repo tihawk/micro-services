@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var validator = require('validator');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var config = require('../config.js');
 
 //use body-parser middleware for POST
@@ -132,5 +134,14 @@ router.get('/recentsearches', (req, res)=>{
 
 });
 //end IMAGE SEARCH
+
+//FILE METADATA
+/*router.post('/filemetadata', upload.single('file'), (req, res)=>{
+	console.log(req);
+});*/
+router.post('/filemetadata', upload.single('file'), (req, res)=>{
+	res.status(200).json(req.file);
+});
+//end FILE METADATA
 
 module.exports = router;
