@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{title}}</h3>	
+  </div>
+  <div class="panel-body">
+    <p>{{descr}}</p>
+    <form ng-submit="search()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="is this what you want..." ng-model="searchTerm">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default">Search</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row" ng-repeat="subimages in images | chunkBy:2" >
+	<a class="col-md-6 image-box" ng-repeat="image in subimages" ng-href="{{image.parentPage}}" target="_blank">
+		<img class="image" ng-src="{{image.url}}" title="{{image.description}}">
+	</a>
+</div>
+
+<div class="row">
+	<div class="btn btn-default col-md-6 col-xs-6" ng-click='prevPage()'>Previous 10</div>
+	<div class="btn btn-default col-md-6 col-xs-6" ng-click='nextPage()'>Next 10</div>
+</div>

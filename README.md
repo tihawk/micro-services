@@ -11,7 +11,7 @@ This is a small collection of pretty useless web micro-services. They can have a
 - [x] Timestamp service with input for custom natural language, ISO and unixtime
 - [x] Header parser with info for IP, OS and Language
 - [x] URL shortener
-- [ ] Image search abstraction layer
+- [x] Image search abstraction layer
 - [ ] Uploaded file metadata
 
 ### TODO:
@@ -20,6 +20,7 @@ This is a small collection of pretty useless web micro-services. They can have a
 - [x] add info about using the API
 - [x] get running online
 - [x] add CORS
+- [ ] add client side for recent image searches
 - [ ] prettify?
 - [x] make a bundle for the client end dependencies (browserify)
 
@@ -29,11 +30,13 @@ This is a small collection of pretty useless web micro-services. They can have a
 
 #### Endpoint:
 <https://ums.glitch.me/api/timestamp/>
+
 ##### GET
 Simply send a GET request to the endpoint with the natural/ISO/unixtime time at the end. If it's invalid, it will return the same JSON object, but with `null` as values.
+
 ##### Sample:
 <https://ums.glitch.me/api/timestamp/1991%2002%2019>
-**returns**
+returns:
 ```javascript
 {
 	"natural": "19 of February, 1991",
@@ -57,8 +60,10 @@ Simply send a GET request to the endpoint, and the response will be a JSON objec
 ```
 
 ### URL Shortener
+
 #### Endpoint:
 <https://ums.glitch.me/api/encode/>
+
 #### POST
 If you want to create new shortened links using your own website, you can use this API service by sending a POST request to the above endpoint. The `Content-Type` should be set to `application/json`, and the format of the POST is as follows:
 ```javascript
@@ -73,6 +78,43 @@ The response will be of the following format:
 {
 	'shortUrl': 'http://ums.glitch.me/l/4'
 }
+```
+
+### Image Search Abstraction Layer
+
+#### Search Endpoint:
+<https://ums.glitch.me/api/imagesearch/>
+
+#### GET
+To GET images, send a request to the above endpoint, with a query of the format `<search term>?offset=<starting index>`, where the offset is optional. For example `https://ums.glitch.me/api/imagesearch/lolcat?offset=10`. The response will take the format of an array of 10 objects like the one below:
+```javascript
+[{
+	"url": "http://steveangello.com/boss.jpg",
+	"type": "image/jpeg",
+	"width": 1024,
+	"height": 768,
+	"size": 102451,
+	"thumbnail": {
+		"url": "http://steveangello.com/thumbnail.jpg",
+		"width": 512,
+		"height": 512
+	}
+}]
+```
+
+#### Recent Searches Endpoint:
+<https://ums.glitch.me/api/recentsearches/>
+
+#### GET
+Upon sending a GET request to the above endpoint, a list of the last ten searches is sent back in a JSON format consisting of an array of 10 objects like this one:
+```javascript
+[{
+"_id": 174,
+"updatedAt": "2017-11-27T14:24:10.786Z",
+"createdAt": "2017-11-27T14:24:10.786Z",
+"searchTerm": "pokemon",
+"__v": 0
+}]
 ```
 
 ### comming soon...

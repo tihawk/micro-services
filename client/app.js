@@ -1,6 +1,4 @@
-//var angular = require('angular');
-
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'angular.filter']);
 
 myApp.config(function($routeProvider, $locationProvider){
 	$locationProvider.hashPrefix('');
@@ -20,6 +18,10 @@ myApp.config(function($routeProvider, $locationProvider){
 		.when('/urlshortener', {
 			controller: 'URLShortenerController',
 			templateUrl: 'views/urlshortener.html'
+		})
+		.when('/imagesearch', {
+			controller: 'ImagesearchController',
+			templateUrl: 'views/imagesearch.html'
 		})
 		.otherwise({
 			redirectTo: '/'
