@@ -85,7 +85,7 @@ app.post('/api/shorten', function(req, res){
 			});
 
 	} else {
-		res.send({'shortUrl': 'Invalid URL'})
+		res.send({'shortUrl': '/l/Invalid URL'})
 	}
 });
 
