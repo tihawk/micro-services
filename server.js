@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const config = require('./config.js');
+//const config = require('./config.js');
 
 var Url = require('./models/url');
 var Counter = require('./models/counter');

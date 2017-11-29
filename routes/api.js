@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var validator = require('validator');
 var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
-var config = require('../config.js');
+//var config = require('../config.js');
 
 //use body-parser middleware for POST
 router.use(bodyParser.json());
@@ -102,7 +102,7 @@ router.get('/imagesearch/:searchterm*', (req, res)=>{
 				params: req.params,
 				query: req.query
 			});*/
-			client.search(searchTerm)
+			client.search(searchTerm, {page: offset})
 				.then(images=>{
 					res.send(images);
 				}, err=>{
